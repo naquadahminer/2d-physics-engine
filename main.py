@@ -3,6 +3,7 @@ from engine import RigidBody, shapes, World, Vector2
 import pygame
 
 FPS = 60
+TEST_ACCELERATION = 10.0
 
 pygame.init()
 
@@ -13,28 +14,31 @@ world = World()
 
 running = True
 while running:
+    screen.fill((0, 0, 0))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.K_w:
-            for body in world.bodies:
-                body.acceleration = Vector2(0.0, 1.0)
-                
-        elif event.type == pygame.K_a:
-            for body in world.bodies:
-                body.acceleration = Vector2(-1.0, 0.0)
-                
-        elif event.type == pygame.K_s:
-            for body in world.bodies:
-                body.acceleration = Vector2(0.0, -1.0)
-                
-        elif event.type == pygame.K_d:
-            for body in world.bodies:
-                body.acceleration = Vector2(1.0, 0.0)
-                
-        else:
-            for body in world.bodies:
-                body.acceleration = Vector2(0.0, 0.0)
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                for body in world.bodies:
+                    body.acceleration = Vector2(0.0, -TEST_ACCELERATION)
+
+            elif event.key == pygame.K_a:
+                for body in world.bodies:
+                    body.acceleration = Vector2(-TEST_ACCELERATION, 0.0)
+                    
+            elif event.key == pygame.K_s:
+                for body in world.bodies:
+                    body.acceleration = Vector2(0.0, TEST_ACCELERATION)
+                    
+            elif event.key == pygame.K_d:
+                for body in world.bodies:
+                    body.acceleration = Vector2(TEST_ACCELERATION, 0.0)
+                    
+            else:
+                for body in world.bodies:
+                    body.acceleration = Vector2(0.0, 0.0)
 
     dt = clock.tick(FPS) / 1000
     world.step(dt)
@@ -42,7 +46,7 @@ while running:
     body: RigidBody
     for body in world.bodies:
         if isinstance(body.shape, shapes.Circle):
-            pygame.draw.circle(screen, pygame.Color(127, 127, 127), pygame.Vector2(body.pos.x, body.pos.y), body.shape.r)
+            pygame.draw.circle(screen, (127, 127, 127), pygame.Vector2(body.pos.x, body.pos.y), body.shape.r)
     pygame.display.flip()
 
 pygame.quit()

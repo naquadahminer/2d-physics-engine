@@ -3,14 +3,18 @@ from engine import RigidBody, shapes, World, Vector2
 import pygame
 
 FPS = 60
-TEST_ACCELERATION = 10.0
+TEST_ACCELERATION = 50.0
+WORLD_WIDTH = 640
+WORLD_HEIGHT = 480
+PIXELS_PER_METER = 20
+
 
 pygame.init()
 
-screen = pygame.display.set_mode((640, 480))
+screen = pygame.display.set_mode((WORLD_WIDTH, WORLD_HEIGHT))
 clock = pygame.time.Clock()
 
-world = World()
+world = World(WORLD_WIDTH/PIXELS_PER_METER, WORLD_HEIGHT/PIXELS_PER_METER)
 
 running = True
 while running:

@@ -13,3 +13,6 @@ class Vector2:
 
     def __sub__(self, other: Vector2):
         return Vector2(self.x - other.x, self.y - other.y)
+
+    def __mul__(self, val: float):
+        return Vector2(self.x * val, self.y * val)

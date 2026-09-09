@@ -1,20 +1,16 @@
 from __future__ import annotations
 from engine import RigidBody, shapes, World, Vector2
 import pygame
+import config
 
-FPS = 60
 TEST_ACCELERATION = 50.0
-WORLD_WIDTH = 640
-WORLD_HEIGHT = 480
-PIXELS_PER_METER = 20
-
 
 pygame.init()
 
-screen = pygame.display.set_mode((WORLD_WIDTH, WORLD_HEIGHT))
+screen = pygame.display.set_mode((config.SCREEN_WIDTH, config.SCREEN_HEIGHT))
 clock = pygame.time.Clock()
 
-world = World(WORLD_WIDTH/PIXELS_PER_METER, WORLD_HEIGHT/PIXELS_PER_METER)
+world = World(config.SCREEN_WIDTH/config.PIXELS_PER_METER, config.SCREEN_HEIGHT/config.PIXELS_PER_METER)
 
 running = True
 while running:
@@ -44,7 +40,7 @@ while running:
                 for body in world.bodies:
                     body.acceleration = Vector2(0.0, 0.0)
 
-    dt = clock.tick(FPS) / 1000
+    dt = clock.tick(config.FPS) / 1000
     world.step(dt)
 
     body: RigidBody

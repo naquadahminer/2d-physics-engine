@@ -16,3 +16,7 @@ class Vector2:
 
     def __mul__(self, val: float):
         return Vector2(self.x * val, self.y * val)
+    
+    # negating the vector
+    def neg(self):
+        return Vector2(-self.x, -self.y)

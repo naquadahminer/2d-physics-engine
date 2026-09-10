@@ -1,4 +1,5 @@
 from __future__ import annotations
+import math
 
 class Vector2:
     x: float
@@ -17,6 +18,19 @@ class Vector2:
     def __mul__(self, val: float):
         return Vector2(self.x * val, self.y * val)
     
+    def abs(self) -> float:
+        return math.sqrt(self.x ** 2 + self.y ** 2)
+
+    def normalize(self) -> Vector2:
+        length = math.sqrt(self.x ** 2 + self.y ** 2)
+        normalized_x = self.x/length
+        normalized_y = self.y/length
+        return Vector2(normalized_x, normalized_y)
+
+    def dot_pr(self, other: Vector2) -> float:
+        return self.x * other.x + self.y * other.y
+
     # negating the vector
-    def neg(self):
-        return Vector2(-self.x, -self.y)
+    def neg(self) -> None:
+        self.x = -self.x
+        self.y = -self.y

@@ -11,6 +11,10 @@ class RigidBody:
         self.velocity = velocity
         self.acceleration = acceleration
 
-    def integrate(self, dt: float):
+    def integrate(self, dt: float) -> None:
         self.velocity += self.acceleration * dt
         self.pos += self.velocity * dt
+
+    # todo
+    def apply_force(self, force: Vector2) -> None:
+        pass

@@ -15,30 +15,25 @@ world = World(config.SCREEN_WIDTH/config.PIXELS_PER_METER, config.SCREEN_HEIGHT/
 running = True
 while running:
     screen.fill((0, 0, 0))
-    for event in pygame.event.get():
+    events = pygame.event.get()
+    for event in events:
         if event.type == pygame.QUIT:
             running = False
 
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w:
-                for body in world.bodies:
-                    body.acceleration = Vector2(0.0, -TEST_ACCELERATION)
+    pressed_keys = pygame.key.get_pressed()
+    
+    for body in world.bodies:
+        accel = Vector2(0.0, 0.0)
+        if pressed_keys[pygame.K_w]:
+            accel += Vector2(0.0, -TEST_ACCELERATION)
+        if pressed_keys[pygame.K_a]:
+            accel += Vector2(-TEST_ACCELERATION, 0.0)
+        if pressed_keys[pygame.K_s]:
+            accel += Vector2(0.0, TEST_ACCELERATION)
+        if pressed_keys[pygame.K_d]:
+            accel += Vector2(TEST_ACCELERATION, 0.0)
+        body.acceleration = accel
 
-            elif event.key == pygame.K_a:
-                for body in world.bodies:
-                    body.acceleration = Vector2(-TEST_ACCELERATION, 0.0)
-                    
-            elif event.key == pygame.K_s:
-                for body in world.bodies:
-                    body.acceleration = Vector2(0.0, TEST_ACCELERATION)
-                    
-            elif event.key == pygame.K_d:
-                for body in world.bodies:
-                    body.acceleration = Vector2(TEST_ACCELERATION, 0.0)
-                    
-            else:
-                for body in world.bodies:
-                    body.acceleration = Vector2(0.0, 0.0)
 
     dt = clock.tick(config.FPS) / 1000
     world.step(dt)

@@ -8,7 +8,7 @@ TEST_ACCELERATION = 10.0
 
 pygame.init()
 
-screen = pygame.display.set_mode()
+screen = pygame.display.set_mode((640, 640))
 SCREEN_WIDTH, SCREEN_HEIGHT = screen.get_size()
 
 clock = pygame.time.Clock()

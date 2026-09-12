@@ -9,14 +9,17 @@ class Vector2:
         self.x = x
         self.y = y
 
-    def __add__(self, other: Vector2):
+    def __add__(self, other: Vector2) -> Vector2:
         return Vector2(self.x + other.x, self.y + other.y)
 
-    def __sub__(self, other: Vector2):
+    def __sub__(self, other: Vector2) -> Vector2:
         return Vector2(self.x - other.x, self.y - other.y)
 
-    def __mul__(self, val: float):
+    def __mul__(self, val: float) -> Vector2:
         return Vector2(self.x * val, self.y * val)
+
+    def __str__(self) -> str:
+        return f"({self.x}, {self.y})"
     
     def abs(self) -> float:
         return math.sqrt(self.x ** 2 + self.y ** 2)

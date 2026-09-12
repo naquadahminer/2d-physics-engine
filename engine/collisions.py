@@ -49,11 +49,24 @@ def resolve_circle_circle_collision(body1: RigidBody, body2: RigidBody) -> None:
     r2 = body2.shape.r
     vel1 = body1.velocity
     vel2 = body2.velocity
+    center_diff = pos2 - pos1
 
+    # for now calculations without accounting for mass 
     # normalized vector which points from the center of one circle to the center of the other
-    n = (body2.pos - body1.pos).normalize()
+    n = (center_diff).normalize()
 
+    # calculating parallel(normal) and tangential(not affected by collision) components for both bodies velocity vectors
     vel_1_nrm = n * vel1.dot_pr(n)
     vel_1_tan = vel1 - vel_1_nrm
     vel_2_nrm = n * vel2.dot_pr(n)
     vel_2_tan = vel2 - vel_2_nrm
+
+    body1.velocity = vel_2_nrm + vel_1_tan
+    body2.velocity = vel_1_nrm + vel_2_tan
+
+    clipping = -(r1 + r2 - center_diff.abs())
+    if clipping < 0:
+        return
+
+    body1.pos -= n * (clipping / 2)
+    body2.pos += n * (clipping / 2)

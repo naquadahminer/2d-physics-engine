@@ -4,10 +4,15 @@ from . import shapes
 
 # the engine will use SI units for all physics calculations
 class RigidBody:
-    def __init__(self, shape: shapes.Shape, mass: float, pos: Vector2, velocity: Vector2, acceleration: Vector2):
+    def __init__(self, shape: shapes.Shape, 
+                 pos: Vector2, 
+                 mass: float = 1.0, 
+                 velocity: Vector2 = Vector2(0.0, 0.0), 
+                 acceleration: Vector2 = Vector2(0.0, 0.0)):
+        
         self.shape = shape
-        self.mass = mass
         self.pos = pos
+        self.mass = mass
         self.velocity = velocity
         self.acceleration = acceleration
 

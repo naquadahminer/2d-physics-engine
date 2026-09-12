@@ -2,7 +2,7 @@ from __future__ import annotations
 from engine import RigidBody, shapes, World, Vector2
 import pygame
 import config
-from renderer import to_screen, to_screen_scalar
+import renderer
 
 TEST_ACCELERATION = 10.0
 
@@ -41,10 +41,6 @@ while running:
     dt = clock.tick(config.FPS) / 1000
     world.step(dt)
 
-    body: RigidBody
-    for body in world.bodies:
-        if isinstance(body.shape, shapes.Circle):
-            pygame.draw.circle(screen, (127, 127, 127), to_screen(body.pos), to_screen_scalar(body.shape.r))
-    pygame.display.flip()
+    renderer.draw_all(screen, world.bodies)
 
 pygame.quit()

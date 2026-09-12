@@ -43,13 +43,11 @@ def resolve_circle_circle_collision(body1: RigidBody, body2: RigidBody) -> None:
     assert isinstance(body1.shape, shapes.Circle)
     assert isinstance(body2.shape, shapes.Circle)
 
-    pos1 = body1.pos
-    pos2 = body2.pos
     r1 = body1.shape.r
     r2 = body2.shape.r
     vel1 = body1.velocity
     vel2 = body2.velocity
-    center_diff = pos2 - pos1
+    center_diff = body2.pos - body1.pos
 
     # for now calculations without accounting for mass 
     # normalized vector which points from the center of one circle to the center of the other
